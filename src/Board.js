@@ -79,15 +79,18 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      console.log(rowIndex); // = whatever the index of the row is from 0 to n
+      console.log(this.rowIndex); // undefined
+      console.log(this.get(rowIndex)); // = that row as an array
+      console.log(this.get('n')); // = 4
     },
+
+    //return false; // fixme
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      //iterate through the total # of rows (n)
     },
-
-
 
     // COLUMNS - run from top to bottom
     // --------------------------------------------------------------
@@ -95,11 +98,13 @@
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
       return false; // fixme
+      //ADD THE ELEMENTS WHERE IT SHOWS 1 at the same index of each row
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
       return false; // fixme
+      //ADD THE ELEMENTS WHERE IT SHOWS 1 at the same index of each row
     },
 
 
