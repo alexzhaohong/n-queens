@@ -25,8 +25,8 @@
     },
 
     togglePiece: function(rowIndex, colIndex) {
-      this.get(rowIndex)[colIndex] = + !this.get(rowIndex)[colIndex];
-      this.trigger('change');
+      this.get(rowIndex)[colIndex] = + !this.get(rowIndex)[colIndex]; // What is the plus sign? -ah
+      this.trigger('change'); //[ [0,0,0], [0,0,0] ] ele[colIndex] --> 0 or 1 +=
     },
 
     _getFirstRowColumnIndexForMajorDiagonalOn: function(rowIndex, colIndex) {
@@ -79,17 +79,46 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      console.log(rowIndex); // = whatever the index of the row is from 0 to n
-      console.log(this.rowIndex); // undefined
-      console.log(this.get(rowIndex)); // = that row as an array
-      console.log(this.get('n')); // = 4
+      console.log(this.rows());
+      var targetRow = this.get(rowIndex);
+      var conflicts = 0;
+      var boardSize = this.get('n'); //4
+
+      for (var i = 0; i < boardSize ; i++) {
+        if (targetRow[i] === 1) {
+          conflicts++;
+        }
+      }
+      if(conflicts > 1) {
+        return true;
+      } else {
+        return false;
+      }
+      // ES6
+      // for (let ele of targetRow) {
+      //   if (ele === 1) {
+      //     conflicts++;
+      //   }
+      // }
+      // return (conflicts > 1) ? true : false
     },
 
-    //return false; // fixme
 
     // test if any rows on this board contain conflicts
+    // iterate through the total # of rows (n)
+    // for each (row in Board), if any hasRowConflictAt(row) returns false, return false
     hasAnyRowConflicts: function() {
-      //iterate through the total # of rows (n)
+
+      var boardSize = this.get('n'); //4
+      var hasConflict = false;
+
+      for (var i = 0; i < boardSize ; i++) {
+        if (this.hasRowConflictAt(i)) {
+          hasConflict = true;
+          break;
+        }
+      }
+    return hasConflict;
     },
 
     // COLUMNS - run from top to bottom
@@ -97,16 +126,35 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
-      //ADD THE ELEMENTS WHERE IT SHOWS 1 at the same index of each row
+      var colIndex = colIndex
+      var conflicts = 0;
+      var boardSize = this.get('n'); //4
+      for (var i = 0; i < boardSize ; i++) {
+        // for each row in board, at the column index, check if 1
+        if (this.get(i)[colIndex] === 1) {
+          conflicts++;
+        }
+      }
+      if(conflicts > 1) {
+        return true;
+      } else {
+        return false;
+      }
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
-      //ADD THE ELEMENTS WHERE IT SHOWS 1 at the same index of each row
-    },
+      var boardSize = this.get('n'); //4
+      var hasConflict = false;
 
+      for (var i = 0; i < boardSize ; i++) {
+        if (this.hasColConflictAt(i)) {
+          hasConflict = true;
+          break;
+        }
+      }
+    return hasConflict;
+    },
 
 
     // Major Diagonals - go from top-left to bottom-right
@@ -148,6 +196,9 @@
         return 0;
       });
     });
-  };
-
+  }; // Make an array of size n, pre-fill with 0. Then, make an array of size n, pre-fill with those [...0] arrays
 }());
+
+
+
+
