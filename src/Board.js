@@ -25,7 +25,7 @@
     },
 
     togglePiece: function(rowIndex, colIndex) {
-      this.get(rowIndex)[colIndex] = + !this.get(rowIndex)[colIndex]; // What is the plus sign? -ah
+      this.get(rowIndex)[colIndex] = + !this.get(rowIndex)[colIndex];
       this.trigger('change'); //[ [0,0,0], [0,0,0] ] ele[colIndex] --> 0 or 1 +=
     },
 
@@ -79,7 +79,6 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      console.log(this.rows());
       var targetRow = this.get(rowIndex);
       var conflicts = 0;
       var boardSize = this.get('n'); //4
@@ -179,7 +178,7 @@
       for (var i = 0; i < boardSize; i++) {
         // for each row in board, at the column index, check if 1
 
-        if (colIndex >= 0 || colIndex < boardSize) {
+        if (colIndex >= 0 || colIndex < boardSize ) {
           if (this.get(i)[colIndex] === 1) {
             conflicts++;
           }
